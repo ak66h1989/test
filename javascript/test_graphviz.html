@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>MathJax TeX Test Page</title>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script src="C:\Users\ak66h_000\node_modules\viz.js\viz.js"></script>
+</head>
+<body>
+
+  <!-- LaTeX math rendering -->
+  <script type="text/javascript">
+      window.MathJax = {
+          tex2jax: {
+              inlineMath: [['$','$'], ['\\(','\\)']],
+              displayMath: [['$$','$$'], ['\[','\]']],
+              processEscapes: true,
+              processEnvironments: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+              TeX: { equationNumbers: { autoNumber: "AMS" },
+                  extensions: ["AMSmath.js", "AMSsymbols.js", "color.js"] }
+          },
+          AuthorInit: function () {
+              MathJax.Hub.Register.StartupHook("Begin",function () {
+                  MathJax.Hub.Queue(function() {
+                      var all = MathJax.Hub.getAllJax(), i;
+                      for(i = 0; i < all.length; i += 1) {
+                          all[i].SourceElement().parentNode.className += ' has-jax';
+                      }
+                  })
+              });
+          }
+      };
+  </script>
+
+`$ v_\pi(s) = \sum_{a \in \mathcal{A}} \pi(a|s) q_\pi(s,a)  $`
+
+
+When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
+$$x = {-b \pm \sqrt[2]{b^2-4ac} \over 2a}.$$
+$$x=(y-1)^2$$
+$\sum_{i=1}^{n}{n^{23}}=f(n)$
+$$\left[
+\begin{array}{clr}
+t_{11} & t_{12} & t_{13}  \\
+t_{21} & t_{22} & t_{23}   \\
+t_{31} & t_{32} & t_{33}
+\end{array}
+\right]$$
+
+$\det\left |
+\begin{array}{cccc}
+ b_{11} & b_{12} & \cdots & b_{1m} \\
+ b_{21} & b_{22} & \cdots & b_{2m} \\
+ \vdots & \vdots & \ddots & \vdots \\
+ b_{n1} & b_{n2} & \cdots & b_{nm} \\
+\end{array}\right | = 0$
+$$XX^T=WDW^T$$
+$$X=U \Sigma V^T$$
+$$XX^T=U \Sigma^2 U^T$$
+
+<script>
+var x = 'a'
+document.body.innerHTML += Viz(`  digraph g {
+  node[shape="circle" , label="", width=0.2, height=0.2]
+  l1[xlabel="v(s')"]
+  l21[xlabel="a", width=0.1, height=0.1 , style=filled]
+  l22[width=0.1, height=0.1, style=filled]
+  l31[xlabel="v\(s'\)"]
+
+  l1 -> l21
+  l1 -> l22
+  l21 -> l31 [xlabel="r"]
+  l21 -> l32
+  l22 -> l33
+  l22 -> l34
+  }`);
+</script>
+
+<!-- graphviz renderring -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/viz.js/1.7.1/viz.js"> </script>
+<script type="text/javascript">
+(function(){
+    var vizPrefix = "language-viz-";
+    Array.prototype.forEach.call(document.querySelectorAll("[class^=" + vizPrefix + "]"), function(x){
+        var engine;
+        x.getAttribute("class").split(" ").forEach(function(cls){
+            if (cls.startsWith(vizPrefix)) {
+                engine = cls.substr(vizPrefix.length);
+            }
+        });
+        var image = new DOMParser().parseFromString(Viz(x.innerText, {format:"svg", engine:engine}), "image/svg+xml");
+        x.parentNode.insertBefore(image.documentElement, x);
+        x.style.display = 'none'
+        x.parentNode.style.backgroundColor = "white"
+    });
+})();
+</script>
+
+```viz-dot
+digraph g {
+node[shape="circle" , label="", width=0.2, height=0.2]
+l1[xlabel="v\(s\)"]
+l21[xlabel="a", width=0.1, height=0.1 , style=filled]
+l22[width=0.1, height=0.1, style=filled]
+l31[xlabel="v\(s'\)"]
+
+l1 -> l21
+l1 -> l22
+l21 -> l31 [xlabel="r"]
+l21 -> l32
+l22 -> l33
+l22 -> l34
+}
+```
+
+</body>
+</html>

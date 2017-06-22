@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SVG.js</title>
+
+<!-- config:TeX-AMS-MML_SVG !!!! -->
+<script type:"text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.2/svg.js"></script>
+<script>
+"use strict";
+define(['libs/svg'], (function () {
+    SVG.Marker = SVG.invent({
+        create: 'marker',
+        inherit: SVG.Container,
+        extend: {
+            getRef: function () {
+                return 'url(#' + this.attr('id') + ')'
+            },
+            update: function (block) {
+                this.clear();
+                if (typeof block == 'function')
+                    block.call(this, this)
+                return this
+            },
+            toString: function () {
+                return this.getRef()
+            }
+        },
+        construct: {
+            marker: function (refX, refY, width, height, block) {
+                return this.defs().marker(refX, refY, width, height, block)
+            }
+        }
+    });
+
+    SVG.extend(SVG.Defs, {
+        // Define gradient
+        marker: function (refX, refY, width, height, block) {
+            return this.put(new SVG.Marker).update(block).attr({
+                refX: refX, refY: refY, markerWidth: width, markerHeight: height, orient: 'auto'
+            })
+        }
+    });
+
+    SVG.extend(SVG.Container, {
+        // Define filter on defs
+        filter: function (block) {
+            return this.defs().filter(block)
+        }
+
+    });
+}));
+</script>
+</head>
+<body>
+
+<div id="drawing"></div>
+
+<div id="line"></div>
+
+<svg height="300" width="300">
+ <line x1="100" y1="100" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+</svg>
+
+<!-- <div id="marker">
+
+<svg width="600px" height="100px">
+
+<marker id="arrow" markerWidth="10" markerHeight="10" refx="9" refy="3" orient="auto" markerUnits="strokeWidth" viewBox="0 0 20 20"> <path d="M0,0 L0,6 L9,3 z" fill="#f00" /> </marker>
+
+<line x1="50" y1="50" x2="250" y2="50" stroke="#000" stroke-width="5" marker-end="url(#arrow)" />
+</svg>
+
+</div> -->
+
+<div id="markerline"></div>
+
+</body>
+
+<script>
+var draw = SVG('drawing').size(300, 300)
+var rect = draw.rect(100, 100).attr({x:100, y:100, fill: '#f06' })
+
+var line = SVG('line').size(300, 300).line().attr({x1: 100, y1:100, x2:200, y2:200, stroke:"#000"})
+
+var markerline = SVG('markerline').size(300, 300)
+var marker = markerline.Marker().attr({id:"arrow1",markerWidth: 10, markerHeight:10, refx:9, refy:3, orient:"auto" ,markerUnits:"strokeWidth", viewBox:"0 0 20 20" })
+var path = marker.path().attr({d: "M0,0 L0,6 L9,3 z", fill:"#f00"})
+var line = markerline.line().attr({x1: 50, y1:50, x2:250, y2:50, stroke:"#000", stroke-width:"5", marker-end:"url(#arrow1)"})
+
+</script>
+
+</html>

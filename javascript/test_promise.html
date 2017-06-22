@@ -1,0 +1,52 @@
+<html>
+<body>
+  <div id='output'></div>
+  <div id='output1'></div>
+  <div id='output2'></div>
+  <div id='output3'></div>
+</body>
+
+<script>
+
+// test resolve
+var p1 = new Promise(function (f, g) {
+  setTimeout(() => f(p2), 100)  //  return p2 and execute it
+})
+
+var p2 = new Promise(function (to_then, to_catch) {
+  // function(){
+  //   to_then(1)
+  // }
+  // function(){u
+  //   to_then(1)
+  // }
+  setTimeout(() => to_catch(2), 300)  // this line executed first, the next line won't be executed
+  setTimeout(() => to_then(1), 300)
+  setTimeout(function() { throw new Error('test') }, 0)
+  document.getElementById('output2').innerHTML = 10
+})
+
+p1
+  .then(x => document.getElementById('output').innerHTML ='then:'+x)
+  .catch(x => document.getElementById('output').innerHTML ='catch:'+x)
+
+
+// test reject
+  var p3 = new Promise(function (f, g) {
+    setTimeout(() => g(p4), 100)  //return p2 but don't execute it
+  })
+
+  var p4 = new Promise(function (to_then, to_catch) {
+    setTimeout(() => to_catch(2), 300)  // this line executed first, the next line won't be executed
+    setTimeout(() => to_then(1), 300)
+    document.getElementById('output3').innerHTML = 11
+  })
+
+  p3
+    .then(x => document.getElementById('output1').innerHTML ='then1:'+x)
+    .catch(x => x)
+    .catch(x => document.getElementById('output1').innerHTML ='catch1:'+x)
+
+</script>
+
+</html>

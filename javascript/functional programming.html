@@ -1,0 +1,22 @@
+<script>
+'use strict'
+function addOne(i) {
+
+if (i > 3) return
+
+console.log(i)
+
+addOne(i + 1)
+
+console.log(i)
+
+}
+addOne(1)
+
+var arr = [1, 2, 3, 4];
+
+var sum = (a, b) => a + b;
+
+var a = arr.reduce(sum, 10)
+console.log(a)
+</script>

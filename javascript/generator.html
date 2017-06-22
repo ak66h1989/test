@@ -1,0 +1,44 @@
+
+<script>
+
+function* gen(){
+  var x = yield 0
+  console.log(x)
+  var y = yield 1
+  console.log(y)
+  var z = yield 2
+  console.log(z)
+}
+var g = gen()
+console.log(g.next())
+console.log(g.next())
+console.log(g.next())
+
+
+console.log(11111111)
+
+var g = gen()
+console.log(g.next(3))
+
+console.log(g.next(4))
+console.log(g.next(5))
+
+function* gen1(){
+  yield 0
+  yield 1
+  yield 2
+  yield 3
+}
+console.log(2222)
+var g1 = gen1()
+console.log(g1.next(3))
+var g2 = g1
+console.log(g2.next(3))
+var f = function(){
+  console.log(1)
+  return 2
+}
+f()
+f1 = f
+console.log(f1())
+</script>

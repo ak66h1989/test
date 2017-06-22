@@ -1,0 +1,69 @@
+<html>
+<head>
+<script src="C:\Users\ak66h_000\Dropbox\webscrap\node_modules\ramda\dist\ramda.js"></script>
+</head>
+<body>
+<div id="output"></div>
+<div id="output1"></div>
+<div id="output2"></div>
+<div id="output3"></div>
+<div id="output4"></div>
+<div id="output5"></div>
+</body>
+<script>
+var j, l, k
+
+// test function scope
+function myFunction(x) {
+     y = x;
+     return y
+}
+myFunction(1)
+
+// test block scope
+
+for (var i=0;i<=10;i++){
+
+}
+
+for (let j=0;j<=10;j++){
+
+}
+
+// test function scope and block scope
+function f() {
+  var l = 0
+  for (var k=0;k<=10;k++){
+    l+=k
+    console.log(k,l)
+  }
+}
+f()
+
+function f() {
+  (function g(){
+    m = 4
+  })()
+}
+// f()
+
+function g() {
+  myFunction(3)
+}
+g()
+
+document.getElementById("output").innerHTML = y
+document.getElementById("output1").innerHTML = i
+document.getElementById("output2").innerHTML = j
+document.getElementById("output3").innerHTML = k
+document.getElementById("output4").innerHTML = l
+document.getElementById("output5").innerHTML = m
+
+//--- concision ---
+// javascript has no function scope unless variable declared with let
+// javascript has no block scope unless the block is in a function or the variable is declared with let
+
+
+</script>
+
+</html>

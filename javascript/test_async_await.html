@@ -1,0 +1,28 @@
+<html>
+<body>
+  <div id='output'></div>
+  <div id='output1'></div>
+  <div id='output2'></div>
+  <div id='output3'></div>
+</body>
+
+<script>
+var sleep = function(para) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            resolve(para * para)
+        }, 1000)
+    })
+}
+
+// for(var i =0 ; i<3; i++){
+//     var result = sleep(i);
+// }
+var result = await sleep(2)
+document.getElementById('output').innerHTML =1
+document.getElementById('output1').innerHTML =result
+
+
+</script>
+
+</html>
